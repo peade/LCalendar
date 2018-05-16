@@ -4,6 +4,7 @@
             factory( global, true ) :
             function( w ) {
                 if ( !w.document ) {
+
                     throw new Error( "LCalendar requires a window with a document" );
                 }
                 return factory( w );
