@@ -1,13 +1,13 @@
 (function (global, factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         module.exports = global.document ?
-            factory( global, true ) :
-            function( w ) {
-                if ( !w.document ) {
+            factory(global, true) :
+            function (w) {
+                if (!w.document) {
 
-                    throw new Error( "LCalendar requires a window with a document" );
+                    throw new Error("LCalendar requires a window with a document");
                 }
-                return factory( w );
+                return factory(w);
             };
     } else {
         factory(global)
@@ -580,6 +580,14 @@
                         target["spd_" + target.id] = flag / 2;
                     }
                 }
+
+                // 弹出选择框后，不拖动日期，直接点击，会出现选择的日期变为NaN
+                // 贡献者  @61-113
+                if (!target["new_" + target.id] || !target["n_t_" + target.id]) {
+                    target["spd_" + target.id] = 0;
+                }
+                // 弹出选择框后，不拖动日期，直接点击，会出现选择的日期变为NaN  end
+
                 if (!target["pos_" + target.id]) {
                     target["pos_" + target.id] = 0;
                 }
